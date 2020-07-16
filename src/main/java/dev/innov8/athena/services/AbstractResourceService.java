@@ -5,6 +5,7 @@ import dev.innov8.athena.repositories.ResourceRepository;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.MultiValueMap;
 
+import javax.annotation.PostConstruct;
 import java.util.Set;
 
 /**
@@ -17,7 +18,7 @@ import java.util.Set;
  * @author Wezley Singleton (Github: wsingleton)
  *
  */
-public abstract class AbstractResourceService<R extends Resource, T> implements ResourceService<T>, InitializingBean {
+public abstract class AbstractResourceService<R extends Resource, T> implements ResourceService<T> {
 
     private final ResourceRepository<R> resourceRepository;
     private final Class<? extends Resource> resourceType;
@@ -67,8 +68,8 @@ public abstract class AbstractResourceService<R extends Resource, T> implements 
         return false;
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    @PostConstruct
+    public void postConstruct() throws Exception {
 
         if (resourceType == null) {
             throw new IllegalStateException("No resource type found for AbstractResourceService!");
