@@ -15,7 +15,8 @@ public abstract class Resource {
 
     /** A unique id string for this resource */
     @Id
-    protected String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
 
     /** System information related to this resource */
     @NotNull
@@ -30,16 +31,16 @@ public abstract class Resource {
         this.metadata = metadata;
     }
 
-    public Resource(String id, ResourceMetadata metadata) {
+    public Resource(Integer id, ResourceMetadata metadata) {
         this(metadata);
         this.id = id;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public Resource setId(String id) {
+    public Resource setId(Integer id) {
         this.id = id;
         return this;
     }
